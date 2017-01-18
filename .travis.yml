@@ -19,6 +19,7 @@ before_install:
           python - -v --ci "travis" "${TRAVIS_REPO_SLUG}" "${TRAVIS_BUILD_NUMBER}" "${TRAVIS_PULL_REQUEST}") || exit 1
 
     # Remove homebrew.
+<<<<<<< HEAD
     - |
       echo ""
       echo "Removing homebrew from Travis CI to avoid conflicts."
@@ -27,6 +28,11 @@ before_install:
       ~/uninstall_homebrew -fq
       rm ~/uninstall_homebrew
 
+=======
+    - brew remove --force --ignore-dependencies $(brew list)
+    - brew cleanup -s
+    - rm -rf $(brew --cache)
+>>>>>>> MNT: Updated the feedstock for conda-smithy version 2.0.0.
 
 install:
     # Install Miniconda.

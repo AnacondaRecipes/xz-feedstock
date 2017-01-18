@@ -1,7 +1,10 @@
 * text=auto
 
+<<<<<<< HEAD
 *.patch binary
 *.diff binary
+=======
+>>>>>>> MNT: Updated the feedstock for conda-smithy version 2.0.0.
 meta.yaml text eol=lf
 build.sh text eol=lf
 bld.bat text eol=crlf
