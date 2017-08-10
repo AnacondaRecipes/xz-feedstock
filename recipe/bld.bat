@@ -6,7 +6,7 @@ if "%ARCH%" == "64" (
 
 cd Windows
 
-call devenv /Upgrade xz_win.sln
+devenv /Upgrade xz_win.sln
 msbuild xz_win.sln /p:Configuration="Release" /p:Platform="%ARCH%" /verbosity:normal
 if errorlevel 1 exit 1
 
