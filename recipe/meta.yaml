@@ -9,17 +9,9 @@ source:
   url: http://tukaani.org/xz/xz-{{ version }}.tar.gz
   sha256: 71928b357d0a09a12a4b4c5fafca8c31c19b0e7d3b8ebb19622e96f26dbf28cb
 
-build:
-  number: 0
-  # Limited to VS 2015 on Win for now - for sake of C99 support.
-  msvc_compiler: 14.0  # [win]
-
 requirements:
   build:
-    - {{ compiler('c') }}
-  run:
-    # Limited to VS 2015 on Win for now - for sake of C99 support.
-    - vs2015_runtime  # [win]
+    - {{ compiler('c') }} # [win]
 
 test:
   commands:
