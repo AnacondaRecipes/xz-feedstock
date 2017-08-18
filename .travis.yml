@@ -27,7 +27,6 @@ before_install:
       ~/uninstall_homebrew -fq
       rm ~/uninstall_homebrew
 
-
 install:
     # Install Miniconda.
     - |
