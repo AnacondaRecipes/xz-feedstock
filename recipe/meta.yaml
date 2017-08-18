@@ -11,6 +11,10 @@ source:
 
 build:
   number: 1
+  run_exports:
+    # XZ's track record of backcompat is very good.  Keep default pins (next major version)
+    #    https://abi-laboratory.pro/tracker/timeline/xz/
+    - {{ pin_compatible('xz') }}
 
 requirements:
   build:
@@ -50,4 +54,3 @@ extra:
     - ocefpaf
     - mingwandroid
     - nehaljwani
-    
