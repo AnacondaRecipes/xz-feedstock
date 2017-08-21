@@ -5,9 +5,8 @@ package:
   version: {{ version }}
 
 source:
-  fn:  xz-{{ version }}.tar.bz2
-  url: http://tukaani.org/xz/xz-{{ version }}.tar.gz
-  sha256: 71928b357d0a09a12a4b4c5fafca8c31c19b0e7d3b8ebb19622e96f26dbf28cb
+  url: http://downloads.sourceforge.net/project/lzmautils/xz-{{ version }}.tar.bz2
+  sha256: fd9ca16de1052aac899ad3495ad20dfa906c27b4a5070102a2ec35ca3a4740c1
 
 build:
   skip: True  # [win and vc<14]
