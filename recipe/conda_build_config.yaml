@@ -1,8 +1,0 @@
-c_compiler:         # [win]
-  - vs2015          # [win]
-vc:
-  - 14
-zip_keys:
-  -
-    - vc            # [win]
-    - c_compiler    # [win]
