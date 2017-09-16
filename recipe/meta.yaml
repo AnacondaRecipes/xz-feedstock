@@ -12,6 +12,8 @@ build:
   skip: True  # [win and vc<14]
   number: 1
   skip: True  # [win and vc<14]
+  features:
+      - vc{{ vc }}  # [win]
   run_exports:
     # XZ's track record of backcompat is very good.  Keep default pins (next major version)
     #    https://abi-laboratory.pro/tracker/timeline/xz/
