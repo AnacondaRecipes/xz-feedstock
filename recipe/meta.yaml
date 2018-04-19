@@ -7,10 +7,11 @@ package:
 source:
   url: http://downloads.sourceforge.net/project/lzmautils/xz-{{ version }}.tar.bz2
   sha256: fd9ca16de1052aac899ad3495ad20dfa906c27b4a5070102a2ec35ca3a4740c1
+  patches:
+    - 0001-Add-vs2008-support-via-cmake.patch
 
 build:
-  number: 2
-  skip: True  # [win and vc<14]
+  number: 3
   run_exports:
     # XZ's track record of backcompat is very good.  Keep default pins (next major version)
     #    https://abi-laboratory.pro/tracker/timeline/xz/
@@ -19,6 +20,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - c99-to-c89  # [win and vc<14]
+    - cmake  # [win and vc<14]
+  host:
+    - msinttypes  # [win and vc<14]
 
 test:
   commands:
