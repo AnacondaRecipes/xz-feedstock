@@ -6,6 +6,10 @@ if "%ARCH%" == "64" (
 
 if "%vc%" == "9" (
   set COMPILER=-DCMAKE_C_COMPILER=c99-to-c89-cmake-nmake-wrap.bat
+  set C99_TO_C89_WRAP_DEBUG_LEVEL=1
+  set C99_TO_C89_WRAP_SAVE_TEMPS=1
+  set C99_TO_C89_WRAP_NO_LINE_DIRECTIVES=1
+  set C99_TO_C89_CONV_DEBUG_LEVEL=1
 )
 
 COPY %LIBRARY_INC%\inttypes.h src\common\inttypes.h
