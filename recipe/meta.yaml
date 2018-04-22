@@ -21,24 +21,21 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - c99-to-c89  # [win and vc<14]
-    - cmake  # [win and vc<14]
+    - c99-to-c89          # [win and vc<14]
+    - cmake               # [win and vc<14]
   host:
-    - msinttypes  # [win and vc<14]
+    - msinttypes          # [win and vc<14]
 
 test:
   commands:
-    - xz --help  # [not win]
-    - unxz --help  # [not win]
-    - lzma --help  # [not win]
-    # Note: no xz executable exists on windows right now - only libs.
-    - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1  # [win]
+    # Note: no xz executable exists on windows vc>=14 right now - only libs (TODO :: check this is still the case)
+    - xz --help                                                       # [unix or (win and vc<14)]
+    - unxz --help                                                     # [unix or (win and vc<14)]
+    - lzma --help                                                     # [not win]
+    - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1         # [win]
+    - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1         # [win]
     - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1  # [win]
-    # conda-inspect tests.
-    #- conda inspect linkages -p $PREFIX xz  # [not win]
-    #- conda inspect objects -p $PREFIX xz  # [osx]
+    - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1          # [win]
 
 about:
   home: http://tukaani.org/xz/

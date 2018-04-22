@@ -1,12 +1,12 @@
 diff -urN CMakeLists.txt CMakeLists.txt
 --- CMakeLists.txt	1969-12-31 16:00:00.000000000 -0800
 +++ CMakeLists.txt	2018-04-14 16:22:17.371803700 -0700
-@@ -0,0 +1,456 @@
+@@ -0,0 +1,461 @@
 +cmake_minimum_required(VERSION 3.0)
 +
 +project(
 +    xz 
-+    VERSION 5.2.1
++    VERSION 5.2.3
 +    LANGUAGES C
 +)
 +
@@ -30,9 +30,13 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +    endif()
 +    
 +    # add the runtime version and target architecture into the DLL name per MS
-+    # guidelines
-+    set(MSVC_SHARED_SUFFIX_BASE "-${PROJECT_VERSION_MAJOR}-vc${MSVCVER}-mt-${ARCH}")
-+    set(CMAKE_SHARED_LIBRARY_SUFFIX "${MSVC_SHARED_SUFFIX_BASE}.dll")
++    # guidelines (Anaconda Distribtuoin mod: do not do this, we want the same
++    # filenames as the non-CMake build; we also add the lib prefix to the .dlls)
++    # set(MSVC_SHARED_SUFFIX_BASE "-${PROJECT_VERSION_MAJOR}-vc${MSVCVER}-mt-${ARCH}")
++    # set(CMAKE_SHARED_LIBRARY_SUFFIX "${MSVC_SHARED_SUFFIX_BASE}.dll")
++    set(CMAKE_SHARED_LIBRARY_PREFIX "lib")
++    set(CMAKE_STATIC_LIBRARY_PREFIX "lib")
++    set(CMAKE_IMPORT_LIBRARY_PREFIX "lib")
 +
 +    set(VER_PRODUCTNAME_STR "XZ Utils <http://tukaani.org/xz>")
 +    set(VER_LEGALCOPYRIGHT_STR "Copyright (c) 2005-2015 Lasse Collin <lasse.collin@tukaani.org>")
@@ -273,7 +277,7 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +    src/xz/util.h
 +)
 +
-+set (xzdec_src
++set (unxz_src
 +    src/xzdec/xzdec.c
 +	src/common/tuklib_progname.c
 +	src/common/tuklib_exit.c 
@@ -332,13 +336,13 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +add_win32_rc(lzma)
 +
 +# lzma static lib
-+add_library(lzma-static STATIC ${lzma_src})
++add_library(lzma_static STATIC ${lzma_src})
 + 
 +target_compile_definitions(lzma
 +    PRIVATE DLL_EXPORT HAVE_CONFIG_H
 +)
 +
-+target_include_directories(lzma-static
++target_include_directories(lzma_static
 +    PRIVATE 
 +        src/common 
 +        src/liblzma
@@ -354,18 +358,18 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +    PUBLIC src/liblzma/api
 +)
 +
-+target_compile_definitions(lzma-static
++target_compile_definitions(lzma_static
 +    PRIVATE LZMA_API_STATIC HAVE_CONFIG_H
 +)
 +
-+add_executable(xz-static ${xz_src} ${get_opt_src})
++add_executable(xz_static ${xz_src} ${get_opt_src})
 +
-+target_compile_definitions(xz-static
++target_compile_definitions(xz_static
 +    PRIVATE LZMA_API_STATIC HAVE_CONFIG_H
 +)
-+target_link_libraries(xz-static lzma-static)
++target_link_libraries(xz_static lzma_static)
 +
-+target_include_directories(xz-static
++target_include_directories(xz_static
 +    PRIVATE 
 +        src/common 
 +        lib
@@ -390,27 +394,27 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +
 +add_win32_rc(xz)
 +
-+# xzdec tool
-+add_executable(xzdec ${xzdec_src} ${get_opt_src})
++# unxz tool
++add_executable(unxz ${unxz_src} ${get_opt_src})
 +
-+set_property(TARGET xzdec PROPERTY DESCRIPTION "xzdec decompression tool for .xz files")
++set_property(TARGET unxz PROPERTY DESCRIPTION "unxz decompression tool for .xz files")
 +
-+target_compile_definitions(xzdec
++target_compile_definitions(unxz
 +    PRIVATE HAVE_CONFIG_H
 +)
-+target_link_libraries(xzdec lzma)
++target_link_libraries(unxz lzma)
 +
-+target_include_directories(xzdec
++target_include_directories(unxz
 +    PRIVATE 
 +        src/common 
 +        lib
 +        ${CMAKE_BINARY_DIR}
 +)
 +
-+add_win32_rc(xzdec)
++add_win32_rc(unxz)
 +
 +# lzmadec tool
-+add_executable(lzmadec ${xzdec_src} ${get_opt_src})
++add_executable(lzmadec ${unxz_src} ${get_opt_src})
 +
 +set_property(TARGET lzmadec PROPERTY DESCRIPTION "lzmadec decompression tool for .lzma files")
 +
@@ -447,7 +451,8 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +
 +add_win32_rc(lzmainfo)
 +
-+install(TARGETS lzma lzma-static xz xz-static xzdec lzmadec lzmainfo EXPORT xz
++#install(TARGETS lzma lzma_static xz xz_static unxz lzmadec lzmainfo EXPORT xz
++install(TARGETS lzma lzma_static xz xz_static unxz lzmainfo EXPORT xz
 +    RUNTIME DESTINATION "bin"
 +    ARCHIVE DESTINATION "lib"
 +    LIBRARY DESTINATION "lib"
@@ -617,7 +622,7 @@ diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 +#define PACKAGE_NAME "XZ Utils"
 +
 +/* Define to the full name and version of this package. */
-+#define PACKAGE_STRING "XZ Utils 5.2.0"
++#define PACKAGE_STRING "XZ Utils 5.2.3"
 +
 +/* Define to the one symbol short name of this package. */
 +#define PACKAGE_TARNAME "xz"
@@ -626,7 +631,7 @@ diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 +#define PACKAGE_URL "http://tukaani.org/xz/"
 +
 +/* Define to the version of this package. */
-+#define PACKAGE_VERSION "5.2.0"
++#define PACKAGE_VERSION "5.2.3"
 +
 +/* The size of `size_t', as computed by sizeof. */
 +#ifdef _WIN64
@@ -645,7 +650,7 @@ diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 +
 +
 +/* Version number of package */
-+#define VERSION "5.2.0"
++#define VERSION "5.2.3"
 +
 diff -urN windows/msvc2013/unistd.h windows/msvc2013/unistd.h
 --- windows/msvc2013/unistd.h	1969-12-31 16:00:00.000000000 -0800
