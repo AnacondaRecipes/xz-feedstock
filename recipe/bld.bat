@@ -34,6 +34,8 @@ nmake VERBOSE=1
 if errorlevel 1 exit /b 1
 nmake VERBOSE=1 install
 if errorlevel 1 exit /b 1
+DEL src\common\inttypes.h
+DEL src\common\stdint.h
 goto common_exit
 
 :vc14_build
@@ -49,6 +51,4 @@ COPY Release\%ARCH%\liblzma\liblzma.lib %LIBRARY_LIB%\liblzma_static.lib
 cd %SRC_DIR%
 MOVE src\liblzma\api\lzma %LIBRARY_INC%\
 COPY src\liblzma\api\lzma.h %LIBRARY_INC%\
-DEL src\common\inttypes.h
-DEL src\common\stdint.h
 exit /b 0
