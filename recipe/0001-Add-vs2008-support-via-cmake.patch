@@ -1,7 +1,7 @@
 diff -urN CMakeLists.txt CMakeLists.txt
 --- CMakeLists.txt	1969-12-31 16:00:00.000000000 -0800
 +++ CMakeLists.txt	2018-04-14 16:22:17.371803700 -0700
-@@ -0,0 +1,461 @@
+@@ -0,0 +1,467 @@
 +cmake_minimum_required(VERSION 3.0)
 +
 +project(
@@ -361,8 +361,10 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +target_compile_definitions(lzma_static
 +    PRIVATE LZMA_API_STATIC HAVE_CONFIG_H
 +)
++target_compile_options(lzma_static PRIVATE -FIconfig.h)
 +
 +add_executable(xz_static ${xz_src} ${get_opt_src})
++target_compile_options(xz_static PRIVATE -FIconfig.h)
 +
 +target_compile_definitions(xz_static
 +    PRIVATE LZMA_API_STATIC HAVE_CONFIG_H
@@ -377,6 +379,7 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +)
 +
 +add_executable(xz ${xz_src} ${get_opt_src})
++target_compile_options(xz PRIVATE -FIconfig.h)
 +
 +set_property(TARGET xz PROPERTY DESCRIPTION "xz data compression tool for .xz and .lzma files")
 +
@@ -396,6 +399,7 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +
 +# unxz tool
 +add_executable(unxz ${unxz_src} ${get_opt_src})
++target_compile_options(unxz PRIVATE -FIconfig.h)
 +
 +set_property(TARGET unxz PROPERTY DESCRIPTION "unxz decompression tool for .xz files")
 +
@@ -415,6 +419,7 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +
 +# lzmadec tool
 +add_executable(lzmadec ${unxz_src} ${get_opt_src})
++target_compile_options(lzmadec PRIVATE -FIconfig.h)
 +
 +set_property(TARGET lzmadec PROPERTY DESCRIPTION "lzmadec decompression tool for .lzma files")
 +
@@ -434,6 +439,7 @@ diff -urN CMakeLists.txt CMakeLists.txt
 +
 +# lzmainfo tool
 +add_executable(lzmainfo ${lzmainfo_src} ${get_opt_src})
++target_compile_options(lzmainfo PRIVATE -FIconfig.h)
 +
 +set_property(TARGET lzmainfo PROPERTY DESCRIPTION "lzmainfo shows information about .lzma files")
 +
@@ -466,7 +472,7 @@ diff -urN CMakeLists.txt CMakeLists.txt
 diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 --- windows/msvc2013/config.h	1969-12-31 16:00:00.000000000 -0800
 +++ windows/msvc2013/config.h	2018-04-14 16:23:11.062931600 -0700
-@@ -0,0 +1,184 @@
+@@ -0,0 +1,190 @@
 +#define S_ISDIR(m) (((m) & S_IFDIR) == S_IFDIR)
 +#define S_ISREG(m) (((m) & S_IFREG) == S_IFREG)
 +
@@ -498,6 +504,9 @@ diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 +/* Define to 1 if sha256 integrity check is enabled. */
 +#define HAVE_CHECK_SHA256 1
 +
++/* Define to 1 if decoders are enabled. */
++#define HAVE_DECODERS 1
++
 +/* Define to 1 if arm decoder is enabled. */
 +#define HAVE_DECODER_ARM 1
 +
@@ -524,6 +533,9 @@ diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 +
 +/* Define to 1 if x86 decoder is enabled. */
 +#define HAVE_DECODER_X86 1
++
++/* Define to 1 if encoders are enabled. */
++#define HAVE_ENCODERS 1
 +
 +/* Define to 1 if arm encoder is enabled. */
 +#define HAVE_ENCODER_ARM 1
