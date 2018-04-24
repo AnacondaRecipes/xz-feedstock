@@ -23,6 +23,7 @@ requirements:
     - {{ compiler('c') }}
     - c99-to-c89          # [win and vc<14]
     - cmake               # [win and vc<14]
+    - make                # [unix]
   host:
     - msinttypes          # [win and vc<14]
 
