@@ -5,7 +5,7 @@
  #include "private.h"
  
 -#if !(defined(HAVE_CLOCK_GETTIME) && HAVE_DECL_CLOCK_MONOTONIC)
-+#if defined(_WIN32) && (_MSC_VER < 1800)
++#if defined(_WIN32)
 +typedef struct timeval {
 +    long tv_sec;
 +    long tv_usec;

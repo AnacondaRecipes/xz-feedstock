@@ -484,7 +484,7 @@ diff -urN windows/msvc2013/config.h windows/msvc2013/config.h
 +#define ssize_t intptr_t
 +#define SSIZE_MAX INTPTR_MAX
 +
-+#if _MSC_VER <= 1900
++#if _MSC_VER < 1900
 +#define snprintf _snprintf
 +#endif
 +#define strcasecmp _stricmp

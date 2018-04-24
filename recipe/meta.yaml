@@ -22,7 +22,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - c99-to-c89          # [win and vc<14]
-    - cmake               # [win and vc<14]
+    - cmake               # [win]
     - make                # [unix]
   host:
     - msinttypes          # [win and vc<14]
@@ -35,7 +35,7 @@ test:
     - echo greetings > hello.txt
     - xz -z hello.txt
     - xz -d hello.txt.xz
-    - findstr greetings hello.txt && (exit /b 1) || (exit /b 0)       # [win]
+    - findstr greetings hello.txt && (exit /b 0) || (exit /b 1)       # [win]
     - cat hello.txt | grep greetings                                  # [not win]
     - lzma --help                                                     # [not win]
     - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1         # [win]
