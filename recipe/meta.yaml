@@ -27,6 +27,8 @@ requirements:
     - make  # [not win]
     - automake  # [not win]
     - libtool   # [not win]
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
     - msinttypes  # [win and vc<14]
 
