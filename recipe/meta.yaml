@@ -10,7 +10,6 @@ source:
   patches:
     - 0001-Add-vs2008-support-via-cmake.patch
     - 0002-Add-gettimeofday-for-VS2008.patch
-
     # Security patch for xzgrep (XZ Utils 4.999.9beta–5.2.5, 5.3.1alpha, 5.3.2alpha):
     # https://www.mail-archive.com/xz-devel@tukaani.org/msg00551.html
     - 0003-xzgrep-ZDI-CAN-16587.patch 
