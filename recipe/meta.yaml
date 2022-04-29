@@ -37,6 +37,9 @@ requirements:
     - msinttypes  # [win and vc<14]
 
 test:
+  requires:
+    # To use 'conda inspect', install conda-build
+    - conda-build # [not win]
   commands:
     - xz --help  # [not win]
     - unxz --help  # [not win]
@@ -47,6 +50,8 @@ test:
     - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1  # [win]
     - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1  # [win]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: https://tukaani.org/xz/
