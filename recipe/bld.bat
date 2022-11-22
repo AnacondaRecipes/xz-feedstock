@@ -20,6 +20,7 @@ set C99_TO_C89_WRAP_DEBUG_LEVEL=1
 set C99_TO_C89_WRAP_SAVE_TEMPS=1
 set C99_TO_C89_WRAP_NO_LINE_DIRECTIVES=1
 set C99_TO_C89_CONV_DEBUG_LEVEL=1
+COPY Release\%ARCH%\liblzma_dll\liblzma.dll %LIBRARY_BIN%\
 COPY %LIBRARY_INC%\inttypes.h src\common\inttypes.h
 COPY %LIBRARY_INC%\stdint.h src\common\stdint.h
 :skip_c99_wrapper
