@@ -6,6 +6,7 @@ package:
 
 source:
   url: https://downloads.sourceforge.net/project/lzmautils/xz-{{ version }}.tar.bz2
+
   sha256: 1f8a43d9fcf325d049a31fe4514dc8c44a6d00ce8860d48c4212d1e349d2a3ed
   patches:
     # - 0001-Add-vs2008-support-via-cmake.patch
@@ -13,6 +14,7 @@ source:
     # Security patch for xzgrep (XZ Utils 4.999.9beta–5.2.5, 5.3.1alpha, 5.3.2alpha):
     # https://www.mail-archive.com/xz-devel@tukaani.org/msg00551.html
     # - 0003-xzgrep-ZDI-CAN-16587.patch
+
 
 build:
   number: 0
