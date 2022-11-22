@@ -49,9 +49,9 @@ test:
     - xz.exe --help  # [win]
     - unxz.exe --help  # [win]
     # - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1  # [win]
+    # - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1  # [win]
+    # - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1  # [win]
+    # - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1  # [win]
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
