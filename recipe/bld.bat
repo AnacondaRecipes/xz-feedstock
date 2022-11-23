@@ -37,11 +37,10 @@ ninja install
 if errorlevel 1 exit /b 1
 DEL src\common\inttypes.h
 DEL src\common\stdint.h
-goto vc14_build
 goto common_exit
 
 :vc14_build
-cd Windows
+cd Windows\vs2017
 devenv /Upgrade xz_win.sln
 msbuild xz_win.sln /p:Configuration="Release" /p:Platform="%ARCH%" /verbosity:normal
 if errorlevel 1 exit /b 1
