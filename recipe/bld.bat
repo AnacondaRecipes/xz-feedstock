@@ -20,9 +20,9 @@ set C99_TO_C89_WRAP_DEBUG_LEVEL=1
 set C99_TO_C89_WRAP_SAVE_TEMPS=1
 set C99_TO_C89_WRAP_NO_LINE_DIRECTIVES=1
 set C99_TO_C89_CONV_DEBUG_LEVEL=1
-COPY Release\%ARCH%\liblzma_dll\liblzma.dll %LIBRARY_BIN%\
 COPY %LIBRARY_INC%\inttypes.h src\common\inttypes.h
 COPY %LIBRARY_INC%\stdint.h src\common\stdint.h
+
 :skip_c99_wrapper
 cmake -GNinja ^
       -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
@@ -37,6 +37,7 @@ ninja install
 if errorlevel 1 exit /b 1
 DEL src\common\inttypes.h
 DEL src\common\stdint.h
+if "%vc%" EQ "14" goto vc14_build
 goto common_exit
 
 :vc14_build
@@ -47,6 +48,7 @@ if errorlevel 1 exit /b 1
 COPY Release\%ARCH%\liblzma_dll\liblzma.dll %LIBRARY_BIN%\
 COPY Release\%ARCH%\liblzma_dll\liblzma.lib %LIBRARY_LIB%\
 COPY Release\%ARCH%\liblzma\liblzma.lib %LIBRARY_LIB%\liblzma_static.lib
+goto common_exit
 
 :common_exit
 cd %SRC_DIR%
