@@ -11,7 +11,7 @@ if "%ARCH%" == "64" (
 :: Let us not bother with the bundled VS solution files since they
 :: do not build the CLI programs.
 :: if "%vc%" == "9" goto vc9_build
-:: goto vc14_build
+ goto vc14_build
 
 :vc9_build
 if "%vc%" NEQ "9" goto skip_c99_wrapper
