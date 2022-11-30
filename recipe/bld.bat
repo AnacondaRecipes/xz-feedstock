@@ -1,29 +1,4 @@
 @echo on
-if "%ARCH%" == "64" (
-   set ARCH=x64
-) else (
-   set ARCH=Win32
-)
-
-:: The vc9 build uses a patch that added CMake support from a fork.
-:: We do not want to use it for vc14 since upstream provide a sln.
-
-:: Let us not bother with the bundled VS solution files since they
-:: do not build the CLI programs.
-:: if "%vc%" == "9" goto vc9_build
-:: goto vc14_build
-
-:vc9_build
-if "%vc%" NEQ "9" goto skip_c99_wrapper
-set COMPILER=-DCMAKE_C_COMPILER=c99-to-c89-cmake-nmake-wrap.bat
-set C99_TO_C89_WRAP_DEBUG_LEVEL=1
-set C99_TO_C89_WRAP_SAVE_TEMPS=1
-set C99_TO_C89_WRAP_NO_LINE_DIRECTIVES=1
-set C99_TO_C89_CONV_DEBUG_LEVEL=1
-COPY %LIBRARY_INC%\inttypes.h src\common\inttypes.h
-COPY %LIBRARY_INC%\stdint.h src\common\stdint.h
-
-:skip_c99_wrapper
 
 :: Build Static library (.lib)
 cmake -GNinja ^
