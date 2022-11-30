@@ -24,17 +24,42 @@ COPY %LIBRARY_INC%\inttypes.h src\common\inttypes.h
 COPY %LIBRARY_INC%\stdint.h src\common\stdint.h
 
 :skip_c99_wrapper
+
+:: Build Static library (.lib)
 cmake -GNinja ^
       -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
       %COMPILER% ^
       -DCMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS:BOOL=FALSE ^
+      -DBUILD_SHARED_LIBS=OFF ^
       -DCMAKE_BUILD_TYPE=Release ^
       --debug-trycompile ^
       .
 ninja
 if errorlevel 1 exit /b 1
+
 ninja install
 if errorlevel 1 exit /b 1
+
+:: Rename Static library from liblzma.lib to liblzma_static.lib
+:: The next step will build the DLL, which creates an import library
+:: that would share the same name.
+move %LIBRARY_LIB%\liblzma.lib %LIBRARY_LIB%\liblzma_static.lib
+
+:: Build Shared library (.dll)
+cmake -GNinja ^
+      -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
+      %COMPILER% ^
+      -DCMAKE_C_USE_RESPONSE_FILE_FOR_OBJECTS:BOOL=FALSE ^
+      -DBUILD_SHARED_LIBS=ON ^
+      -DCMAKE_BUILD_TYPE=Release ^
+      --debug-trycompile ^
+      .
+ninja
+if errorlevel 1 exit /b 1
+
+ninja install
+if errorlevel 1 exit /b 1
+
 DEL src\common\inttypes.h
 DEL src\common\stdint.h
 goto common_exit
@@ -46,7 +71,6 @@ msbuild xz_win.sln /p:Configuration="Release" /p:Platform="%ARCH%" /verbosity:no
 if errorlevel 1 exit /b 1
 COPY Release\%ARCH%\liblzma_dll\liblzma.dll %LIBRARY_BIN%\
 COPY Release\%ARCH%\liblzma_dll\liblzma.lib %LIBRARY_LIB%\
-COPY Release\%ARCH%\liblzma\liblzma.lib %LIBRARY_LIB%\liblzma_static.lib
 goto common_exit
 
 :common_exit
