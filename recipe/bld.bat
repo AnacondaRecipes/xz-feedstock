@@ -39,15 +39,6 @@ DEL src\common\inttypes.h
 DEL src\common\stdint.h
 goto common_exit
 
-:vc14_build
-cd Windows\vs2017
-devenv /Upgrade xz_win.sln
-msbuild xz_win.sln /p:Configuration="Release" /p:Platform="%ARCH%" /verbosity:normal
-if errorlevel 1 exit /b 1
-COPY Release\%ARCH%\liblzma_dll\liblzma.dll %LIBRARY_BIN%\
-COPY Release\%ARCH%\liblzma_dll\liblzma.lib %LIBRARY_LIB%\
-goto common_exit
-
 :common_exit
 cd %SRC_DIR%
 MOVE src\liblzma\api\lzma %LIBRARY_INC%\
