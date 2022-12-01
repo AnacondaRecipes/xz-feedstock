@@ -18,7 +18,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - c99-to-c89  # [win and vc<14]
     # cmake-no-system to break circular dependency xz -> cmake -> xz
     - cmake-no-system  # [win]
     - ninja-base  # [win]
