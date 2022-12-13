@@ -51,6 +51,7 @@ about:
   license: LGPL-2.1-or-later and GPL-2.0-or-later
   license_file: COPYING
   license_family: GPL2
+  license_url: https://git.tukaani.org/?p=xz.git;a=blob;f=COPYING
   summary: Data compression software with high compression ratio
   description: |
     XZ Utils is free general-purpose data compression software with a high
