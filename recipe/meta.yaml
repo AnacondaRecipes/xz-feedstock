@@ -1,4 +1,4 @@
-{% set version = "5.2.9" %}
+{% set version = "5.4.0" %}
 
 package:
   name: xz
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://sourceforge.net/projects/lzmautils/files/xz-{{ version }}.tar.bz2
-  sha256: b194507fba3a462a753c553149ccdaa168337bcb7deefddd067ba987c83dfce6
+  sha256: 795ea0494c66d509b052ddc36dc63bd634e59ff2a0f39c16a3b5644dd01d87e6
 
 build:
   number: 0
