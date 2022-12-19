@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://sourceforge.net/projects/lzmautils/files/xz-{{ version }}.tar.bz2
+  url: https://downloads.sourceforge.net/project/lzmautils/xz-{{ version }}.tar.bz2
   sha256: b194507fba3a462a753c553149ccdaa168337bcb7deefddd067ba987c83dfce6
 
 build:
@@ -51,7 +51,6 @@ about:
   license: LGPL-2.1-or-later and GPL-2.0-or-later
   license_file: COPYING
   license_family: GPL2
-  license_url: https://git.tukaani.org/?p=xz.git;a=blob;f=COPYING
   summary: Data compression software with high compression ratio
   description: |
     XZ Utils is free general-purpose data compression software with a high
