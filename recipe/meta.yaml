@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://sourceforge.net/projects/lzmautils/files/xz-{{ version }}.tar.bz2
+  url: https://downloads.sourceforge.net/project/lzmautils/xz-{{ version }}.tar.bz2
   sha256: b194507fba3a462a753c553149ccdaa168337bcb7deefddd067ba987c83dfce6
 
 build:
