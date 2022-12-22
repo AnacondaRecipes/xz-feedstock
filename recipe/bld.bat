@@ -35,6 +35,9 @@ if errorlevel 1 exit /b 1
 ninja install
 if errorlevel 1 exit /b 1
 
+@REM Build command line tools
+bash windows\build.bash
+
 DEL src\common\inttypes.h
 DEL src\common\stdint.h
 goto common_exit
