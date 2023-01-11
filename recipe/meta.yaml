@@ -17,11 +17,10 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    # cmake-no-system to break circular dependency xz -> cmake -> xz
-    - cmake-no-system  # [win]
-    - ninja-base  # [win]
-    - make  # [not win]
+    - {{ compiler('c') }}  # [not win]
+    - m2w64-toolchain      # [win]
+    - posix     # [win]
+    - make      # [not win]
     - automake  # [not win]
     - libtool   # [not win]
     - patch     # [not win]
