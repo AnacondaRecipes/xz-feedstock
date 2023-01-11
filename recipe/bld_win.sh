@@ -19,7 +19,7 @@ make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
 
-cp -v src/liblzma/.libs/liblzma-*.lib "$LIBRARY_PREFIX/bin/liblzma-static.lib"
+cp -v src/liblzma/.libs/liblzma-*.a "$LIBRARY_PREFIX/lib/liblzma-static.lib"
 
 make distclean
 
