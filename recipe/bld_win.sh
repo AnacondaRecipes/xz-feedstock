@@ -2,7 +2,7 @@
 
 export BUILD=x86_64-w64-mingw32
 export HOST=x86_64-w64-mingw32
-
+# See $SRC_DIR/windows/build.bash for more info.
 ./configure \
       --prefix=${PREFIX} \
       --enable-silent-rules \
@@ -25,7 +25,7 @@ make distclean
 
 # Build the normal speed-optimized (shared) binaries.
 ./configure \
-    --prefix= \
+    --prefix=${PREFIX} \
     --enable-silent-rules \
     --disable-dependency-tracking \
     --disable-nls \
