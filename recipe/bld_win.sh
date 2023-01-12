@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $SRC_DIR
+
 export BUILD=x86_64-w64-mingw32
 export HOST=x86_64-w64-mingw32
 # See $SRC_DIR/windows/build.bash for more info.
