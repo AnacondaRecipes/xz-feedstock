@@ -39,4 +39,7 @@ make -C tests check
 cp -v src/liblzma/.libs/liblzma-*.dll "$LIBRARY_PREFIX/bin/liblzma.dll"
 cp -v src/liblzma/.libs/liblzma.a "$LIBRARY_PREFIX/lib/liblzma.lib"
 
+mv src/liblzma/api/lzma $LIBRARY_INC
+cp src/liblzma/api/lzma.h $LIBRARY_INC
+
 find $PREFIX -name '*.la' -delete
