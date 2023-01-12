@@ -7,11 +7,11 @@ msbuild ^
   /p:AdditionalIncludeDirectories=%LIBRARY_INC% ^
   /p:AdditionalDependencies=/LIBPATH:%LIBRARY_LIB% ^
   /p:WindowsTargetPlatformVersion=10.0.17763.0 ^
-  windows\vs2017\xz_win.sln
+  windows\%c_compiler%\xz_win.sln
 
-COPY windows\vs2017\Release\x64\liblzma\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma_static.lib
-COPY windows\vs2017\Release\x64\liblzma_dll\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma.lib
-COPY windows\vs2017\Release\x64\liblzma_dll\liblzma.dll %LIBRARY_PREFIX%\bin\liblzma.dll
+COPY windows\%c_compiler%\Release\x64\liblzma\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma_static.lib
+COPY windows\%c_compiler%\Release\x64\liblzma_dll\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma.lib
+COPY windows\%c_compiler%\Release\x64\liblzma_dll\liblzma.dll %LIBRARY_PREFIX%\bin\liblzma.dll
 
 @REM Use min-gw to build command line tools
 set MSYSTEM=MINGW%ARCH%
