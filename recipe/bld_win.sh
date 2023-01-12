@@ -19,26 +19,6 @@ make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
 
-cp -v src/liblzma/.libs/liblzma.a "$LIBRARY_PREFIX/lib/liblzma_static.lib"
-
-make distclean
-
-# Build the normal speed-optimized (shared) binaries.
-./configure \
-    --prefix=${PREFIX} \
-    --enable-silent-rules \
-    --disable-dependency-tracking \
-    --disable-nls \
-    --disable-scripts \
-    --build="$BUILD" \
-    CFLAGS="-march=x86-64 -mtune=generic -O2"
-make -C src/liblzma
-make -C src/xz LDFLAGS=-static
-make -C tests check
-
-cp -v src/liblzma/.libs/liblzma-*.dll "$LIBRARY_PREFIX/bin/liblzma.dll"
-cp -v src/liblzma/.libs/liblzma.a "$LIBRARY_PREFIX/lib/liblzma.lib"
-
 mv src/liblzma/api/lzma $LIBRARY_INC
 cp src/liblzma/api/lzma.h $LIBRARY_INC
 

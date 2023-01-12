@@ -1,8 +1,25 @@
 copy "%RECIPE_DIR%\bld_win.sh" .
 
+@REM Use the MSVC sln to build static lib and dll
+msbuild ^
+  /p:Platform=%PLATFORM% ^
+  /p:Configuration=Release ^
+  /p:AdditionalIncludeDirectories=%LIBRARY_INC% ^
+  /p:AdditionalDependencies=/LIBPATH:%LIBRARY_LIB% ^
+  /p:WindowsTargetPlatformVersion=10.0.17763.0 ^
+  windows\vs2017\xz_win.sln
+
+COPY windows\vs2017\Release\x64\liblzma\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma_static.lib
+COPY windows\vs2017\Release\x64\liblzma_dll\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma.lib
+COPY windows\vs2017\Release\x64\liblzma_dll\liblzma.dll %LIBRARY_PREFIX%\bin\liblzma.dll
+
+@REM Use min-gw to build command line tools
 set MSYSTEM=MINGW%ARCH%
 set MSYS2_PATH_TYPE=inherit
 set CHERE_INVOKING=1
+
+@REM No longer want to use cl.exe
+set CC=
 
 set "saved_recipe_dir=%RECIPE_DIR%"
 FOR /F "delims=" %%i IN ('cygpath.exe -u -p "%PATH%"') DO set "PATH_OVERRIDE=%%i"
