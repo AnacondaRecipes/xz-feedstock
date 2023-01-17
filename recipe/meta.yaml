@@ -1,12 +1,12 @@
-{% set version = "5.2.8" %}
+{% set version = "5.2.10" %}
 
 package:
   name: xz
   version: {{ version }}
 
 source:
-  url: https://downloads.sourceforge.net/project/lzmautils/xz-{{ version }}.tar.bz2
-  sha256: 1f8a43d9fcf325d049a31fe4514dc8c44a6d00ce8860d48c4212d1e349d2a3ed
+  url: https://sourceforge.net/projects/lzmautils/files/xz-{{ version }}.tar.bz2
+  sha256: 01b71df61521d9da698ce3c33148bff06a131628ff037398c09482f3a26e5408
 
 build:
   number: 0
@@ -18,10 +18,9 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    # cmake-no-system to break circular dependency xz -> cmake -> xz
-    - cmake-no-system  # [win]
-    - ninja-base  # [win]
-    - make  # [not win]
+    - m2w64-toolchain      # [win]
+    - posix     # [win]
+    - make      # [not win]
     - automake  # [not win]
     - libtool   # [not win]
     - patch     # [not win]
@@ -57,7 +56,6 @@ about:
     compression ratio. XZ Utils were written for POSIX-like systems, but also
     work on some not-so-POSIX systems.
   doc_url: https://tukaani.org/xz/
-  doc_source_url: https://github.com/xz-mirror/xz/blob/master/README
   dev_url: https://git.tukaani.org/
 
 extra:
