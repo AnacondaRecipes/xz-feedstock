@@ -21,7 +21,16 @@ make -j${CPU_COUNT} ${VERBOSE_AT}
 make check
 make install
 
+# Move command-line tools to their windows location.
+mv ${PREFIX}/bin/* $LIBRARY_BIN
+
 mv src/liblzma/api/lzma $LIBRARY_INC
 cp src/liblzma/api/lzma.h $LIBRARY_INC
+
+# Remove posix style directories
+rm -rf ${PREFIX}/lib
+rm -rf ${PREFIX}/include
+rm -rf ${PREFIX}/share
+rm -rf ${PREFIX}/bin
 
 find $PREFIX -name '*.la' -delete
