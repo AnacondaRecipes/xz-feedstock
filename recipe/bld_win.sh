@@ -24,4 +24,8 @@ make install
 mv src/liblzma/api/lzma $LIBRARY_INC
 cp src/liblzma/api/lzma.h $LIBRARY_INC
 
+rm -rf ${PREFIX}/lib
+rm -rf ${PREFIX}/include
+rm -rf ${PREFIX}/share
+
 find $PREFIX -name '*.la' -delete
