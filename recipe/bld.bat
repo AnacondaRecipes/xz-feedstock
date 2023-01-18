@@ -7,8 +7,8 @@ msbuild ^
   /p:WindowsTargetPlatformVersion=10.0.17763.0 ^
   windows\%c_compiler%\xz_win.sln
 
-COPY windows\%c_compiler%\Release\x64\liblzma\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma_static.lib
-COPY windows\%c_compiler%\Release\x64\liblzma_dll\liblzma.lib %LIBRARY_PREFIX%\lib\liblzma.lib
+COPY windows\%c_compiler%\Release\x64\liblzma\liblzma.lib %LIBRARY_LIB%\liblzma_static.lib
+COPY windows\%c_compiler%\Release\x64\liblzma_dll\liblzma.lib %LIBRARY_LIB%\liblzma.lib
 COPY windows\%c_compiler%\Release\x64\liblzma_dll\liblzma.dll %LIBRARY_PREFIX%\bin\liblzma.dll
 
 @REM Use min-gw to build command line tools
