@@ -43,6 +43,7 @@ test:
     - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1  # [win]
     - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1  # [win]
     - if not exist %PREFIX%\\Library\\bin\\xz.exe exit 1  # [win]
+    - if exist %PREFIX%\\lib exit 1 # [win]
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
     - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
