@@ -9,7 +9,7 @@ source:
   sha256: aa49909cbd9028c4666a35fa4975f9a6203ed98154fbb8223ee43ef9ceee97c3
 
 build:
-  number: 1
+  number: 0
   run_exports:
     # XZ's track record of backcompat is very good.  Keep default pins (next major version)
     #    https://abi-laboratory.pro/tracker/timeline/xz/
