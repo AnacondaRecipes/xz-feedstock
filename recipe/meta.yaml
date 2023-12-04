@@ -29,7 +29,7 @@ requirements:
 test:
   requires:
     # To use 'conda inspect', install conda-build
-    - conda-build # [not win]
+    - conda-build # [osx]
   commands:
     - xz --help  # [not win]
     - unxz --help  # [not win]
