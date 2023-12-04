@@ -1,4 +1,4 @@
-{% set version = "5.4.2" %}
+{% set version = "5.4.5" %}
 
 package:
   name: xz
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://sourceforge.net/projects/lzmautils/files/xz-{{ version }}.tar.bz2
-  sha256: aa49909cbd9028c4666a35fa4975f9a6203ed98154fbb8223ee43ef9ceee97c3
+  sha256: 8ccf5fff868c006f29522e386fb4c6a1b66463fbca65a4cfc3c4bd596e895e79
 
 build:
   number: 0
@@ -29,7 +29,7 @@ requirements:
 test:
   requires:
     # To use 'conda inspect', install conda-build
-    - conda-build # [not win]
+    - conda-build # [osx]
   commands:
     - xz --help  # [not win]
     - unxz --help  # [not win]
