@@ -65,7 +65,7 @@ about:
     compression ratio. XZ Utils were written for POSIX-like systems, but also
     work on some not-so-POSIX systems.
   doc_url: https://tukaani.org/xz/
-  dev_url: https://git.tukaani.org/
+  dev_url: https://github.com/tukaani-project/xz
 
 extra:
   recipe-maintainers:
