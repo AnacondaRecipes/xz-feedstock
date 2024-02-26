@@ -1,4 +1,5 @@
-{% set version = "5.4.5" %}
+{% set version = "5.4.6" %}
+{% set major = version.split('.')[0] %}
 
 package:
   name: xz
@@ -6,7 +7,7 @@ package:
 
 source:
   url: https://sourceforge.net/projects/lzmautils/files/xz-{{ version }}.tar.bz2
-  sha256: 8ccf5fff868c006f29522e386fb4c6a1b66463fbca65a4cfc3c4bd596e895e79
+  sha256: 913851b274e8e1d31781ec949f1c23e8dbcf0ecf6e73a2436dc21769dd3e6f49
 
 build:
   number: 0
@@ -31,19 +32,27 @@ test:
     # To use 'conda inspect', install conda-build
     - conda-build # [osx]
   commands:
-    - xz --help  # [not win]
-    - unxz --help  # [not win]
-    - lzma --help  # [not win]
-    - xz.exe --help  # [win]
+    - xz --help        # [not win]
+    - unxz --help      # [not win]
+    - lzma --help      # [not win]
+    - xz.exe --help    # [win]
     - unxz.exe --help  # [win]
-    - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\bin\\xz.exe exit 1  # [win]
-    - if exist %PREFIX%\\lib exit 1 # [win]
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
+    - test -f ${PREFIX}/include/lzma.h                          # [unix]
+    - test -f ${PREFIX}/lib/pkgconfig/liblzma.pc                # [unix]
+    - test -f ${PREFIX}/lib/liblzma.a                           # [unix]
+    - test -f ${PREFIX}/lib/liblzma${SHLIB_EXT}                # [unix]
+    - test -f ${PREFIX}/lib/liblzma.{{ major }}${SHLIB_EXT}    # [osx]
+    - test -f ${PREFIX}/lib/liblzma${SHLIB_EXT}.{{ major }}    # [linux]
+    - test -f ${PREFIX}/lib/liblzma${SHLIB_EXT}.{{ version }}  # [linux]
+    - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1            # [win]
+    - if not exist %PREFIX%\\Library\\lib\\liblzma.lib exit 1            # [win]
+    - if not exist %PREFIX%\\Library\\lib\\liblzma_static.lib exit 1     # [win]
+    - if not exist %PREFIX%\\Library\\lib\\pkgconfig\\liblzma.pc exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1             # [win]
+    - if not exist %PREFIX%\\Library\\bin\\xz.exe exit 1                 # [win]
+    - if exist %PREFIX%\\lib exit 1                                      # [win]
+    - conda inspect linkages -p $PREFIX $PKG_NAME                        # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME                         # [osx]
 
 about:
   home: https://tukaani.org/xz/

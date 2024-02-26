@@ -27,6 +27,9 @@ mv ${PREFIX}/bin/* $LIBRARY_BIN
 mv src/liblzma/api/lzma $LIBRARY_INC
 cp src/liblzma/api/lzma.h $LIBRARY_INC
 
+[[ -d ${LIBRARY_LIB}/pkgconfig ]] || mkdir ${LIBRARY_LIB}/pkgconfig
+cp src/liblzma/liblzma.pc ${LIBRARY_LIB}/pkgconfig
+
 # Remove posix style directories
 rm -rf ${PREFIX}/lib
 rm -rf ${PREFIX}/include
