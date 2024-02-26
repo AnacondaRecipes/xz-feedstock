@@ -31,6 +31,7 @@ test:
   requires:
     # To use 'conda inspect', install conda-build
     - conda-build # [osx]
+    - pkg-config
   commands:
     - xz --help        # [not win]
     - unxz --help      # [not win]
