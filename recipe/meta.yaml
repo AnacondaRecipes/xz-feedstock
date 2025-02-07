@@ -57,7 +57,7 @@ test:
     - conda inspect objects -p $PREFIX $PKG_NAME                         # [osx]
 
 about:
-  home: https://xz.tukaani.org/xz-utils/
+  home: https://tukaani.org/xz/
   license: LGPL-2.1-or-later and GPL-2.0-or-later and 0BSD
   license_file: COPYING
   license_family: GPL2
