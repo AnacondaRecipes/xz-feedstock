@@ -19,11 +19,8 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - cmake-no-system  # [win]
-    - ninja-base       # [win]
-    - make      # [not win]
-    - automake  # [not win]
-    - libtool   # [not win]
+    - cmake-no-system
+    - ninja-base
   host:
     - msinttypes  # [win and vc<14]
 
@@ -41,13 +38,11 @@ test:
     - test -f ${PREFIX}/include/lzma.h                          # [unix]
     - test -f ${PREFIX}/lib/pkgconfig/liblzma.pc                # [unix]
     - test -f `pkg-config --variable=libdir --dont-define-prefix liblzma`/liblzma${SHLIB_EXT}  # [unix]
-    - test -f ${PREFIX}/lib/liblzma.a                           # [unix]
     - test -f ${PREFIX}/lib/liblzma${SHLIB_EXT}                # [unix]
     - test -f ${PREFIX}/lib/liblzma.{{ major }}${SHLIB_EXT}    # [osx]
     - test -f ${PREFIX}/lib/liblzma${SHLIB_EXT}.{{ major }}    # [linux]
     - test -f ${PREFIX}/lib/liblzma${SHLIB_EXT}.{{ version }}  # [linux]
     - if not exist %PREFIX%\\Library\\bin\\liblzma.dll exit 1            # [win]
-    - if not exist %PREFIX%\\Library\\lib\\lzma_static.lib exit 1        # [win]
     - if not exist %PREFIX%\\Library\\lib\\pkgconfig\\liblzma.pc exit 1  # [win]
     - if not exist %PREFIX%\\Library\\include\\lzma.h exit 1             # [win]
     - if not exist %PREFIX%\\Library\\bin\\xz.exe exit 1                 # [win]

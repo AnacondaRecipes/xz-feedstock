@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Get an updated config.sub and config.guess
-cp -r ${BUILD_PREFIX}/share/libtool/build-aux/config.* ./build-aux
+# Create and enter the build directory
+mkdir -p build && cd build
 
-./configure --prefix=${PREFIX}  \
-            --build=${BUILD}    \
-            --host=${HOST}
-make -j${CPU_COUNT} ${VERBOSE_AT}
-make check
-make install
+# Build shared library
+cmake -GNinja \
+      -DCMAKE_INSTALL_PREFIX="$PREFIX" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_SHARED_LIBS=ON \
+      .. || exit 1
 
-# remove libtool files
-find $PREFIX -name '*.la' -delete
+ninja && ninja install
