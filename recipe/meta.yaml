@@ -36,7 +36,7 @@ test:
     - xz.exe --help    # [win]
     - unxz.exe --help  # [win]
     - test -f ${PREFIX}/include/lzma.h                          # [unix]
-    - test -f ${PREFIX}/lib/cmake/liblzma/liblzma-targets.cmake # [unix]
+    - test -f ${PREFIX}/lib/cmake/liblzma/liblzma-config.cmake  # [unix]
     - test -f ${PREFIX}/lib/pkgconfig/liblzma.pc                # [unix]
     - test -f `pkg-config --variable=libdir --dont-define-prefix liblzma`/liblzma${SHLIB_EXT}  # [unix]
     - test ! -f ${PREFIX}/lib/liblzma.a                        # [unix]
