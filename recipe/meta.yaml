@@ -17,6 +17,7 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - cmake-no-system  # [win]
     - ninja  # [win]
@@ -34,6 +35,7 @@ outputs:
     script: install-liblzma.bat  # [win]
     requirements:
       build:
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
@@ -63,6 +65,8 @@ outputs:
     script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
+      build:
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
@@ -88,6 +92,7 @@ outputs:
     script: install.bat  # [win]
     requirements:
       build:
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
@@ -128,6 +133,7 @@ outputs:
         - {{ pin_subpackage('liblzma') }}
     requirements:
       build:
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
@@ -174,6 +180,7 @@ outputs:
     script: install.bat  # [win]
     requirements:
       build:
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
@@ -213,6 +220,9 @@ outputs:
       always_include_files:
         - Library/lib/cmake/liblzma  # [win]
     requirements:
+      build:
+        - {{ stdlib('c') }}
+        - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
         - make  # [not win]
@@ -236,6 +246,7 @@ outputs:
   - name: xz-static
     requirements:
       build:
+        - {{ stdlib('c') }}
         - {{ compiler('c') }}
         - cmake-no-system  # [win]
         - ninja  # [win]
@@ -275,12 +286,6 @@ about:
   dev_url: http://git.tukaani.org/
 
 extra:
-  anaconda-services:
-    ref: https://anaconda.zendesk.com/agent/tickets/78379
-    reason: Dependency for pdfplumber
-  recipe-maintainers:
-    - ianaobi
-    - bkreider
   recipe-maintainers:
     - msarahan
     - ocefpaf
