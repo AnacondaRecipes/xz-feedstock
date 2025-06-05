@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Create and enter the build directory
-mkdir -p build && cd build
+./configure --prefix=${PREFIX}  \
+            --build=${BUILD}    \
+            --host=${HOST}
 
-# Build shared library
-cmake -GNinja \
-      -DCMAKE_INSTALL_PREFIX="$PREFIX" \
-      -DCMAKE_BUILD_TYPE=Release \
-      -DBUILD_SHARED_LIBS=ON \
-      .. || exit 1
+make -j${CPU_COUNT} ${VERBOSE_AT}
 
-ninja && ninja install
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" != 1 ]]; then
+  make check || cat tests/test-suite.log
+fi
+
+# remove libtool files
+find $PREFIX -name '*.la' -delete
