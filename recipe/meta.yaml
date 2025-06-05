@@ -280,6 +280,7 @@ extra:
     reason: Dependency for pdfplumber
   recipe-maintainers:
     - ianaobi
+    - bkreider
   recipe-maintainers:
     - msarahan
     - ocefpaf
