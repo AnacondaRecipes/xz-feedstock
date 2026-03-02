@@ -1,4 +1,4 @@
-{% set version = "5.6.4" %}
+{% set version = "5.8.2" %}
 {% set major = version.split('.')[0] %}
 
 package:
@@ -10,7 +10,7 @@ source:
   sha256: 269e3f2e512cbd3314849982014dc199a7b2148cf5c91cedc6db629acdf5e09b
 
 build:
-  number: 1
+  number: 0
   run_exports:
     # XZ's track record of backcompat is very good.  Keep default pins (next major version)
     #    https://abi-laboratory.pro/tracker/timeline/xz/
