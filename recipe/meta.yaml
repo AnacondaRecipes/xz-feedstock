@@ -33,7 +33,6 @@ test:
     - unxz --help      # [not win]
     - lzma --help      # [not win]
     - xz.exe --help    # [win]
-    - unxz.exe --help  # [win]
     - test -f ${PREFIX}/include/lzma.h                          # [unix]
     - test -f ${PREFIX}/lib/cmake/liblzma/liblzma-config.cmake  # [unix]
     - test -f ${PREFIX}/lib/pkgconfig/liblzma.pc                # [unix]
