@@ -24,7 +24,7 @@ requirements:
     - cmake-no-system
     - ninja-base
   host:
-    - msinttypes  # [win and vc<14]
+
 
 test:
   requires:
